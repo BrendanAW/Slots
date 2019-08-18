@@ -1,0 +1,796 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+/*
+ * Lever()
+EasyGame() version(decreases by 1 credit per game) -JL
+HardGame() version(decreases by 5 credits per game) - BW
+Cashout() JL/BW
+PlayerInput(int x )(Takes money from player’s wallet and gives to slot machine, declares credit amounts) -  KP
+Intro -AA
+Graphics AA+BW
+
+ * */
+namespace CasinoRoyaleSlots
+{
+    class Program
+    {
+
+        public static int credits = 0;
+        public static int PlayerWallet = 0;
+        public static int MoneyInSlot = 0;
+        public static int Winnings = 0;
+        static void Main(string[] args)
+
+        {
+            Intro();
+            TheTime(0);
+            Taxi();
+            Foody();
+            Console.Clear();
+            string CasinoConv = "You know I'm sick of giving you choices, just go checkout that very well drawn, not shady at all casino already....Just press any key already so you can see it";
+            for (int i = 0; i < CasinoConv.Length; i++)
+            {
+                long x = 0;
+                Console.Write(CasinoConv[i]);
+                while (x < 9999999)
+                    x++;
+            }
+            Console.WriteLine();
+            Console.ReadKey();
+            CasinoGraphic();
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Now inside the casino, you see the slot machines, you decide, eh, why not waste a few bucks on it, so you approuch the first one you see.");
+            Console.WriteLine("\rHow much money do you have in your wallet? Please enter a whole dollar amount");
+            PlayerWallet = Convert.ToInt32(Console.ReadLine());
+            PlayerInput();
+            Outro();
+            Console.ReadKey();
+        }
+        static void Intro()
+        {
+
+            string title = @"
+
+
+      /$$$$$$  /$$             /$$                    /$$$$$$$$                                             /$$$$$$   /$$$$$$    /$$    /$$$$$$ 
+      /$$__  $$| $$            | $$                   | $$_____/                                            /$$__  $$ /$$$_  $$ /$$$$   /$$__  $$
+     | $$  \__/| $$  /$$$$$$  /$$$$$$   /$$$$$$$      | $$     /$$$$$$  /$$    /$$ /$$$$$$   /$$$$$$       |__/  \ $$| $$$$\ $$|_  $$  | $$  \ $$
+     |  $$$$$$ | $$ /$$__  $$|_  $$_/  /$$_____/      | $$$$$ /$$__  $$|  $$  /$$//$$__  $$ /$$__  $$        /$$$$$$/| $$ $$ $$  | $$  |  $$$$$$$
+      \____  $$| $$| $$  \ $$  | $$   |  $$$$$$       | $$__/| $$$$$$$$ \  $$/$$/| $$$$$$$$| $$  \__/       /$$____/ | $$\ $$$$  | $$   \____  $$
+      /$$  \ $$| $$| $$  | $$  | $$ /$$\____  $$      | $$   | $$_____/  \  $$$/ | $$_____/| $$            | $$      | $$ \ $$$  | $$   /$$  \ $$
+     |  $$$$$$/| $$|  $$$$$$/  |  $$$$//$$$$$$$/      | $$   |  $$$$$$$   \  $/  |  $$$$$$$| $$            | $$$$$$$$|  $$$$$$/ /$$$$$$|  $$$$$$/
+      \______/ |__/ \______/    \___/ |_______/       |__/    \_______/    \_/    \_______/|__/            |________/ \______/ |______/ \______/ 
+                     /$$       /$$       /$$          /$$   /$$ /$$   /$$ /$$   /$$       /$$$$$$$$ /$$$$$$$$ /$$$$$$$$                          
+                   /$$$$$$   /$$$$$$   /$$$$$$       | $$  / $$| $$  / $$| $$  / $$      |_____ $$/|_____ $$/|_____ $$/                          
+                  /$$__  $$ /$$__  $$ /$$__  $$      |  $$/ $$/|  $$/ $$/|  $$/ $$/           /$$/      /$$/      /$$/                           
+                 | $$  \__/| $$  \__/| $$  \__/       \  $$$$/  \  $$$$/  \  $$$$/           /$$/      /$$/      /$$/                            
+                 |  $$$$$$ |  $$$$$$ |  $$$$$$         >$$  $$   >$$  $$   >$$  $$          /$$/      /$$/      /$$/                             
+                  \____  $$ \____  $$ \____  $$       /$$/\  $$ /$$/\  $$ /$$/\  $$        /$$/      /$$/      /$$/                              
+                  /$$  \ $$ /$$  \ $$ /$$  \ $$      | $$  \ $$| $$  \ $$| $$  \ $$       /$$/      /$$/      /$$/                               
+                 |  $$$$$$/|  $$$$$$/|  $$$$$$/      |__/  |__/|__/  |__/|__/  |__/      |__/      |__/      |__/                                
+                  \_  $$_/  \_  $$_/  \_  $$_/                                                                                                   
+                    \__/      \__/      \__/                                                                                                     
+                                                                                                                                                 
+                                                        Press any button to begin
+                                                              ";
+
+
+            string IntroText4 = @"Maybe we should just call a cab... do you want to call a cab?...y/n";
+            string IntroText5 = @"Oh im sorry, phone battery runed out, guess you need to try something else...";
+            string IntroText6 = @"Maybe lets grab something to eat? Pizza? Kebab? Hummus?...Pick one 1.Pizza 2.Kebab 3.Hummus";
+            string IntroText7 = @"well the next bus is likely 3h away so why try one of those shady casinos that no one in their right mind would enter. Press any key to continue...";
+            string IntroText = @"You can't believe this, you somehow slept past your stop and you've ended up on THE OUTSKIRTS OF TOWN...Press any key to continue";
+
+
+            Console.Write(title);
+            Console.ReadKey();
+            Console.Clear();
+
+
+
+            for (int i = 0; i < IntroText.Length; i++)
+            {
+                Console.Write(IntroText[i]);
+                long x = 0;
+                while (x < 20000000) // my first working loop Y_Y               
+                    x++;
+            }
+            Console.ReadKey();
+            Console.Clear();
+        }
+        static void TheTime(int x)
+        {
+            string IntroText3 = @"Wow, who would have thought? Well guess you have to find a way to kill some time...Press any key to continue";
+            string IntroText2 = @"Roaming around the hood won't bring you any good, what time is it anyway?...(Write which hour is it, use full hours)";
+
+            
+                if (x == 0)
+                {
+                    for (int i2 = 0; i2 < IntroText2.Length; i2++)
+                    {
+                        Console.Write(IntroText2[i2]);
+                        if (i2 == IntroText2.Length - 1)
+                            Console.WriteLine(" ");
+                        long x2 = 0;
+                        while(x2 < 20000000) // my first working loop Y_Y 
+                            x2++;
+                    }
+                }
+            try
+            {
+                int hour = Convert.ToInt32(Console.ReadLine());
+
+                if (hour > 23 || hour < 1)
+                {
+                    Console.WriteLine("Well maybe I didn't made myself clear Use 1-23");
+                    TheTime(1);
+                    return;
+                }
+                else
+                {
+                    Console.Clear();
+                    for (int i3 = 0; i3 < IntroText3.Length; i3++)
+                    {
+                        Console.Write(IntroText3[i3]);
+                        long x3 = 0;
+                        while (x3 < 20000000) // my first working loop Y_Y 
+                            x3++;
+                    }
+                }
+            }
+            catch
+            {
+                Console.Write("Please only enter a number from 1-23\n");
+                TheTime(1);
+                return;   
+            }
+            Console.ReadKey();
+            Console.Clear();
+        }
+        static void Taxi()
+        {
+            string IntroText4 = @"Maybe we should just call a cab... do you want to call a cab?...1.yes 2.no";
+            string IntroText5 = @"Oh im sorry, phone battery ran out, I guess you need to try something else...Press any key to continue";
+            string IntroText55 = @"Yeah maybe it's no the best idea, calling a cab in these parts, you'll end up missing a liver...or worse...Press any key to continue";
+            Console.Clear();
+            for (int i4 = 0; i4 < IntroText4.Length; i4++)
+            {
+                Console.Write(IntroText4[i4]);
+                if (i4 == IntroText4.Length - 1)
+                    Console.WriteLine();
+                long x4 = 0;
+                while (x4 < 20000000) // my first working loop Y_Y            
+                    x4++;
+            }
+            while (true)
+            {
+                try
+                {
+                    int yn = Convert.ToInt32(Console.ReadLine());
+                    if (yn == 1)
+                    {
+                        Console.Clear();
+                        for (int w = 0; w < IntroText5.Length; w++)
+                        {
+                            Console.Write(IntroText5[w]);
+                            long s = 0;
+                            while (s < 20000000) // my first working loop Y_Y 
+                                s++;
+                        }
+                    }
+                    else if (yn == 2)
+                    {
+                        Console.Clear();
+                        for (int e = 0; e < IntroText55.Length; e++)
+                        {
+                            Console.Write(IntroText55[e]);
+                            long d = 0;
+                            while (d < 20000000) // my first working loop Y_Y                   
+                                d++;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid number");
+                        continue;
+                    }
+                    
+                }
+                catch
+                {
+                    Console.WriteLine("Please enter a valid number, either 1 or 2");
+                    continue;
+                }
+                break;
+            }
+            Console.ReadKey();
+        }
+        static void Foody()
+
+        {
+            string IntroText6 = @"Maybe lets grab something to eat? Pizza? Kebab? Hummus?...Pick one 1.Pizza 2.Kebab 3.Hummus";
+            string ChoicePizza = @"Food from some nasty bar ? Get a grip...Press any key to continue";
+            string ChoiceKebab = @"Who knows what they add to those here... lets just skip it...Press any key to continue";
+            string ChoiceHummus = @"I hope you are joking...Press any key to continue";
+            Console.Clear();
+            for (int i = 0; i < IntroText6.Length; i++)
+            {
+                Console.Write(IntroText6[i]);
+                if (i == IntroText6.Length - 1)
+                    Console.WriteLine();
+                long x = 0;
+                while (x < 20000000) // my first working loop Y_Y 
+                    x++;
+            }
+            while (true)
+            {
+
+                try
+                {
+                    int food = Convert.ToInt32(Console.ReadLine());
+                    if (food == 1)
+                    {
+                        Console.Clear();
+                        for (int q = 0; q < ChoicePizza.Length; q++)
+                        {
+                            Console.Write(ChoicePizza[q]);
+                            long a = 0;
+                            while (a < 20000000) // my first working loop Y_Y 
+                                a++;
+                        }
+                    }
+                    else if (food == 2)
+                    {
+                        Console.Clear();
+                        for (int w = 0; w < ChoiceKebab.Length; w++)
+                        {
+                            Console.Write(ChoiceKebab[w]);
+                            long s = 0;
+                            while (s < 20000000) // my first working loop Y_Y 
+                                s++;
+                        }
+                        Console.ReadKey();
+                    }
+                    else if (food == 3)
+                    {
+                        Console.Clear();
+                        for (int e = 0; e < ChoiceHummus.Length; e++)
+                        {
+                            Console.Write(ChoiceHummus[e]);
+                            long d = 0;
+                            while (d < 20000000) // my first working loop Y_Y 
+                                d++;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid number");
+                        continue;
+                    }
+                }
+                
+                catch
+                {
+                    Console.WriteLine("Please type 1,2, or 3, no other number.");
+                    continue;
+                }
+                break;
+            }
+            Console.ReadKey();
+        }
+        static void CasinoGraphic()
+        {
+            string Graphic1 = @"  
+                 |                |*  *                 *  *                 *  *  *  *                  *  *                     *  *  **  *  **  *  * |   |
+                 |                |*  *   *  **  * * * **  *  * *  * *  *    *  * **  **  **  **  *  *  **  * *  * * * * * * *    *  *  **  *  **  *  * |   |
+                 |                |*  *   *  **  ** * * *     *  *  *  *     *  ** *  **  **  **        ** * * ** * * **  *  *      *  *   *  *   *  *  |   |
+                 |                |*  **  *  **  ** * * *  *  *   *   *      *  * *   **  **  **  *  *  ** * * **   * **  *       *   *  *   *   *  *   |   |
+                 |                |* * **  * * * ** *  **   * ** **  *       *  *  *  *  * * *  * *  *  * * * *  * * * *  *       *  *   *  *   *  *    |   | ";
+            string Graphic2 = @"   
+                 |                |,--.                 ,--.                 ,--.  ,--.                  ,--.                     ,-----.,-----.,-----. |   |
+                 |                ||  |   ,--.,--. ,---.|  |,-. ,--. ,--.    |  ,'.|  |,--.,--.,--,--,--.|  |-.  ,---. ,--.--.    '--,  /'--,  /'--,  / |   |
+                 |                ||  |   |  ||  || .--'|     /  \  '  /     |  |' '  ||  ||  ||        || .-. '| .-. :|  .--'     .'  /  .'  /  .'  /  |   |
+                 |                ||  '--.'  ''  '\ `--.|  \  \   \   '      |  | `   |'  ''  '|  |  |  || `-' |\   --.|  |       /   /  /   /  /   /   |   |
+                 |                |`-----' `----'  `---'`--'`--'.-'  /       `--'  `--' `----' `--`--`--' `---'  `----'`--'       `--'   `--'   `--'    |   | ";
+            string Graphic3 = @"
+
+
+                        
+                      
+                     +--------------------------------------------------------------------------------------------------------------------------------------+
+                    /                                                                                                                                      /|
+                   /                                                                                                                                      / |
+                  /                                                                                                                                      /  |
+                 +--------------------------------------------------------------------------------------------------------------------------------------+   |
+                 |                +---------------------------------------------------------------------------------------------------------------------+   |
+                 |                |,--.                 ,--.                 ,--.  ,--.                  ,--.                     ,-----.,-----.,-----. |   |
+                 |                ||  |   ,--.,--. ,---.|  |,-. ,--. ,--.    |  ,'.|  |,--.,--.,--,--,--.|  |-.  ,---. ,--.--.    '--,  /'--,  /'--,  / |   |
+                 |                ||  |   |  ||  || .--'|     /  \  '  /     |  |' '  ||  ||  ||        || .-. '| .-. :|  .--'     .'  /  .'  /  .'  /  |   |
+                 |                ||  '--.'  ''  '\ `--.|  \  \   \   '      |  | `   |'  ''  '|  |  |  || `-' |\   --.|  |       /   /  /   /  /   /   |   |
+                 |                |`-----' `----'  `---'`--'`--'.-'  /       `--'  `--' `----' `--`--`--' `---'  `----'`--'       `--'   `--'   `--'    |   |
+                 |                |+--------------------------------------------------------------------------------------------------------------------|   |
+                 |                                                                                                                                      |   |
+                 |                                                                                                                                      |   |
+                 |  +---------+---------+                                                                                                               |   |
+                 |  |         |         |                     ******                                                                                    |   |
+                 |  |         |         |                    ***oo***                                                                                   |   |
+                 |  |         |         |                     **\/**                                                                                    |   |
+                 |  |       o |o        |                      /  \                                                                                     |   |
+                 |  |         |         |                     /    \                                                                                    |  /
+                 |  |         |         |                    /______\                                                                                   | /
+                 |  |         |         |                      ||||                                                                                     |/
+                 +--+---------v---------+---------------------------------------------------------------------------------------------------------------+
+ ";
+            Console.Clear();
+            Console.Write(Graphic3);
+            bool rotate = true;
+            int counting = 0;
+            while (rotate == true)
+            {
+                int x = 0;
+                Console.SetCursorPosition(0, 10);
+                Console.Write(Graphic1);
+                while (x < 99999999)
+                    x++;
+                Console.SetCursorPosition(0, 10);
+                Console.Write("\r{0}", Graphic2);
+                x = 0;
+                while (x < 99999999)
+                    x++;
+                if (counting >= 7)
+                    rotate = false;
+                counting++;
+            }
+            Console.SetCursorPosition(0, 40);
+            Console.Write("Press Space to Enter the Casino");
+
+
+
+
+        }
+        static void PlayerInput()
+        {
+            Console.WriteLine("How much money would you like to put into the slot maching? Plese enter only whole numbers, no decimals");
+
+            while (true)
+            {
+                try
+                {
+                    int x = Convert.ToInt32(Console.ReadLine());
+                    if (x == 0)
+                    {
+                        Console.WriteLine("$0? You're trying to put in no money? You think you can literally input $0 into a slot machine??? Please give me a real, whole, dollar amount");
+                        PlayerInput();
+                        return;
+                    }
+                    if (x - PlayerWallet > 0)
+                    {
+                        Console.WriteLine("Please give an amount that you can afford");
+                        PlayerInput();
+                        return;
+                    }
+                    else
+                    {
+                        MoneyInSlot += x;
+                        PlayerWallet -= x;
+                        ChooseGameDifficulty();
+                    }
+                }
+                catch
+                {
+                    Console.Write("Please enter a valid number");
+                    continue;
+                }
+                break;
+            }
+        }
+        static void ChooseGameDifficulty()
+        {
+            Console.WriteLine("**************************************************************************************  ");
+            Console.WriteLine("                      You have input into this slot machine:${0}", MoneyInSlot);
+            Console.WriteLine("**************************************************************************************  ");
+            Console.WriteLine("Which game would you like to play? 1 for easy($1 per spin) or 2 for hard($5 per spin)");
+            Console.WriteLine("**************************************************************************************  ");
+            while (true)
+            {
+                try
+                {
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1: //easy
+                                //check moneyInSlot and then see if they have enough to play and if not ask for more money
+                            CreditCalc(1);
+                            EasyGame();
+                            break;
+                        case 2: //hard
+                                //check moneyInSlot and then see if they have enough to play and if not ask for more money or play easy(if easy go to line after case "easy")
+                            if (MoneyInSlot < 5)
+                            {
+                                Console.WriteLine("You have insufficient funds to play hard mode, would you like to add money or go to easy mode? Please type add or easy");
+                                string WhichChoice = Console.ReadLine();
+                                if (WhichChoice.ToUpper() == "ADD")
+                                {
+                                    PlayerInput();
+                                    return;
+                                }
+                                else if (WhichChoice.ToUpper() == "EASY") goto case 1;
+                                else
+                                {
+                                    Console.WriteLine("Please type one of the two options");
+                                    goto case 2;
+                                }
+                            }
+                            if (MoneyInSlot == 0) goto case 2;
+                            CreditCalc(5);
+                            Console.Clear();
+                            HardGame();
+                            break;
+                        default: //if neither works
+                            Console.WriteLine("Please choose either 1 or 2, no other options are available");
+                            ChooseGameDifficulty();//line address of declaration of string choice
+                            break;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Please type an int");
+                    continue;
+                }
+                break;
+            }
+            }
+        static void CreditCalc(int x)
+        {
+            credits = MoneyInSlot / x;
+            MoneyInSlot = MoneyInSlot%x;
+
+        }
+        static void SlotMachine()
+        {
+            Console.Title = "Slots Fever";
+            string slotmachines = @"              _______________________________
+             //#############################\\
+            //###############################\\ 
+           //#################################\\
+          //###################################\\ 
+         //#####################################\\ 
+        //#######################################\\
+       //#########################################\\
+      //##########|SLOT REVOLUTION 2019|###########\\
+     ||       _______________________________       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||  __   ||
+     ||      ||                            || |__|  ||
+     ||      ||                            ||  ||   ||
+     ||      ||____________________________||  ||   ||
+     ||                                        ||   ||
+     ||                                        ||   ||
+     ||                                       //    ||
+     ||_____________________________________________||
+     ||_____________________________________________||
+     || MM    MMM     O     NN   NN   EEEEEE Y    Y ||
+     || MMM  MMMM    OOO    NNN  NN   EE      Y  Y  ||
+     || MM MM  MM   OOOOO   NN N NN   EEE      YY   ||
+     || MM     MM    OOO    NN  NNN   EE       YY   || 
+     ||_MM_____MM_____O_____NN___NN___EEEEEE___YY___||
+     ||_____________________________________________||
+ ";
+            Console.Write("\r{0}", slotmachines);
+        }
+        static void PullLever()
+        {
+            int x = 0;
+            while (x < 500000000)
+                x++;
+            string PulledSlotMachine = @"              _______________________________
+             //#############################\\
+            //###############################\\ 
+           //#################################\\
+          //###################################\\ 
+         //#####################################\\ 
+        //#######################################\\
+       //#########################################\\
+      //##########|SLOT REVOLUTION 2019|###########\\
+     ||       _______________________________       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||       ||
+     ||      ||                            ||      |_|
+     ||      ||                            ||     //||
+     ||      ||____________________________||    // ||
+     ||                                         //  ||
+     ||                                        //   ||
+     ||                                       //    ||
+     ||_____________________________________________||
+     ||_____________________________________________||
+     || MM    MMM     O     NN   NN   EEEEEE Y    Y ||
+     || MMM  MMMM    OOO    NNN  NN   EE      Y  Y  ||
+     || MM MM  MM   OOOOO   NN N NN   EEE      YY   ||
+     || MM     MM    OOO    NN  NNN   EE       YY   || 
+     ||_MM_____MM_____O_____NN___NN___EEEEEE___YY___||
+     ||_____________________________________________||";
+            Console.SetCursorPosition(0, 0);
+            Console.Write("\r{0}", PulledSlotMachine);
+            x = 0;
+            while (x < 500000000)
+                x++;
+            Console.SetCursorPosition(0, 0);
+            SlotMachine();
+        }
+        static void EasyGame()
+        {
+            // This part its not needed Its just for 
+            //Random number generator
+
+            Random randNumGen = new Random();
+            Console.Clear();
+            //call readkey for spacebar and store it in local variable
+
+
+
+
+            //embed while loop so you can play until your run out of credits
+            while (credits > 0)
+            {
+                Console.SetCursorPosition(0, 0);
+                SlotMachine();
+                Console.SetCursorPosition(15, 11);
+                Console.Write("To begin please press space");
+                Console.SetCursorPosition(15, 13);
+                Console.Write("Credits: {0}", credits);
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                //roll slots
+
+                if (keyInfo.Key == ConsoleKey.Spacebar)
+                {
+                    //spacebar pressed
+                    Console.Clear();
+                    SlotMachine();
+                    PullLever();
+                    //number of credits decreased by 1
+                    credits--;
+                    bool amIDone = false;
+                    int spins = 0;
+                    while (amIDone == false)
+                    //declare slots
+                    {
+                        string[][] ChoicesCombined = new string[][]
+                        {
+                         new string[] { "$$||$$", "$ ||  ", "$$||$$", "  || $", "$$||$$" },
+                         new string[] { "777777", "    77", "   77 ", "  77  ", " 77   " },
+                         new string[] { "X    X", " X  X ", "  XX  ", " X  X ", "X    X" }
+                         };
+                        int slot1 = randNumGen.Next(0, 3);
+                        int slot2 = randNumGen.Next(0, 3);
+                        int slot3 = randNumGen.Next(0, 3);
+                        for (int i = 0; i < 5; i++)
+                        {
+
+                            Console.SetCursorPosition(15, 11 + i);
+                            Console.Write("\r     ||      || {0}    {1}    {2} ", ChoicesCombined[slot1][i], ChoicesCombined[slot2][i], ChoicesCombined[slot3][i]);
+                            if (spins % 2 == 0 && i % 2 == 0)
+                            {
+                                Console.SetCursorPosition(25, 11 + i);
+                                Console.Write("\r     ||      || {0} |  {1} |  {2} ", ChoicesCombined[slot1][i], ChoicesCombined[slot2][i], ChoicesCombined[slot3][i]);
+                            }
+                            else if (spins % 2 == 1 && i % 2 == 1)
+                            {
+                                Console.SetCursorPosition(25, 11 + i);
+                                Console.Write("\r     ||      || {0} |  {1} |  {2} ", ChoicesCombined[slot1][i], ChoicesCombined[slot2][i], ChoicesCombined[slot3][i]);
+                            }
+
+                        }
+                        //Console.SetCursorPosition(0, 13);
+                        // Console.Write("\r     ||      ||   {0}          {1}          {2}    ",slot1,slot2,slot3);
+                        int x = 0;
+                        while (x < 100000000)
+                            x++;
+                        spins++;
+                        if (spins == 20)
+                        {
+                            if (slot1 == slot2 && slot1 == slot3)
+                            {
+                                Console.SetCursorPosition(0, 28);
+                                Console.WriteLine("Congrats you won!\nWould you like to play again? If yes press space.");
+                                Winnings += 5;
+                            }
+                            else
+                            {
+                                //display lose 
+                                Console.SetCursorPosition(0, 28);
+                                Console.Write("Sorry, better luck next time. Do you want to try again?\nIf yes press space");
+                            }
+                            amIDone = true;
+                        }
+
+                    }
+                    //store keyinfo in readkey
+                    keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.Spacebar)
+                        Console.Clear();
+                    else
+                    {
+                        Console.WriteLine("\nAre you sure you want to quit? If so you will not be refunded any unused credits\nPlease type yes to quit and no to play again.");
+                        string answer = Console.ReadLine();
+                        if (answer.ToUpper() == "YES")
+                        {
+                            CashOut(Winnings);
+                            return;
+                        }
+                        else if (answer.ToUpper() == "NO")
+                        {
+                            Console.Clear();
+                            continue;
+                        }
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("If you want to play press Spacebar!!!!");
+                    //store keyinfo in readkey
+                    keyInfo = Console.ReadKey(true);
+                    Console.Clear();
+                }
+
+            }
+            if (credits <= 0)
+            {
+                Console.Clear();
+                Console.WriteLine("GAME OVER!!! You don’t have anymore credits");
+                CashOut(Winnings);
+                // Ask the player if he want to play again
+                Console.WriteLine("You are now out of credits, would you like to add more or end playing? Please type add or end");
+                string answer = Convert.ToString(Console.ReadLine());
+
+                // If yes go to the beginning of the game, otherwise the program close
+                if (answer.ToUpper() == "ADD")
+                {
+                    PlayerInput();
+
+                }
+                else
+                {
+
+                    return;
+
+                }
+
+            }
+
+        }
+        static void HardGame()
+        {
+
+            Random spin = new Random();
+            int x = 0; int y = 11;
+            char[] Symbols = new char[9] { 'X', '7', '$', 'Y', '8', 'W', '0', '?', '#' };
+
+            while (credits > 0)
+            {
+                bool Spinner = true;
+                int CountDown = 0;
+                int Timer = 0;
+                SlotMachine();
+                Console.SetCursorPosition(15, 11);
+                Console.Write("To begin please press space");
+                Console.SetCursorPosition(15, 13);
+                Console.Write("Credits: {0}", credits);
+
+                bool begin = false;
+                int AnimSpin = 0;
+                while (begin == false)
+                {
+                    ConsoleKeyInfo spacePushed = Console.ReadKey(true);
+                    if (spacePushed.Key == ConsoleKey.Spacebar)
+                    {
+                        begin = true;
+                        Console.Clear();
+                        SlotMachine();
+                    }
+                }
+                PullLever();
+                Console.SetCursorPosition(x, y);
+                while (Spinner == true)
+                {
+                    Timer = 0;
+                    char[] RandomSlots = new char[9] { Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)], Symbols[spin.Next(0, 9)] };
+                    Console.Write("\r     ||      ||    {0}         {1}         {2}   ||\n     ||      ||_________|_________|________\n     ||      ||    {3}         {4}         {5}   ||\n     ||      ||_________|_________|________|\n     ||      ||    {6}         {7}         {8}   ||\n     ||      ||_________|_________|________\n", RandomSlots[0], RandomSlots[1], RandomSlots[2], RandomSlots[3], RandomSlots[4], RandomSlots[5], RandomSlots[6], RandomSlots[7], RandomSlots[8]);
+                    Console.SetCursorPosition(x, y);
+                    if (AnimSpin % 2 == 0 && CountDown % 2 == 0)
+                        Console.Write("\r     ||      ||    {0}    |    {1}    |    {2}   ||\n     ||      ||_________ _________ ________\n     ||      ||    {3}    |    {4}    |    {5}   ||\n     ||      ||_________ _________ ________|\n     ||      ||    {6}    |    {7}    |    {8}   ||\n     ||      ||____________________________\n", RandomSlots[0], RandomSlots[1], RandomSlots[2], RandomSlots[3], RandomSlots[4], RandomSlots[5], RandomSlots[6], RandomSlots[7], RandomSlots[8]);
+                    Console.SetCursorPosition(x, y);
+
+                    if (CountDown == 20)
+                    {
+                        Spinner = false;
+                        credits--;
+                        Console.SetCursorPosition(0, 27);
+                        if (DidIWin(RandomSlots))
+                        {
+                            Console.Write("Congratulations, you won! To play again press space, to end playing press any other key");
+                            Winnings += 10;
+                        }
+                        else
+                            Console.Write("I'm sorry you didn't win, to play again please press space, to end playing press any other key");
+                        ConsoleKeyInfo PlayOrDont = Console.ReadKey(true);
+                        if (PlayOrDont.Key == ConsoleKey.Spacebar)
+                        {
+                            Console.Write("\r                                                                                                                                     ");
+                            Console.SetCursorPosition(0, 0);
+                        }
+                        else
+                        {
+                            CashOut(Winnings);
+                            return;
+                        }
+
+                    }
+                    while (Timer < 100000000)
+                        Timer++;
+                    CountDown++;
+                }
+            }
+            if (credits <= 0)
+            {
+                Console.Clear();
+                CashOut(Winnings);
+                if (PlayerWallet == 0)
+                {
+                    Console.WriteLine("Whoops looks like you're all out of money! Press any key to end this wild ride of gambling");
+                    Console.ReadKey();
+                    return;
+                }
+                Console.WriteLine("You are currently out of credits, would you like to add more or end the game? Please type add or end");
+                string WhatWillYouDo = Console.ReadLine();
+                if (WhatWillYouDo.ToUpper() == "ADD")
+                    PlayerInput();
+                else return;
+            }
+        }
+        static bool DidIWin(char[] x)
+        {
+            char BaseSym = ' ';
+            for (int i = 0; i < x.Length; i += 3)
+            {
+                BaseSym = x[i];
+                if (BaseSym == x[i + 1] && BaseSym == x[i + 2])
+                    return true;
+            }
+            BaseSym = x[0];
+            if (BaseSym == x[4] && BaseSym == x[8])
+                return true;
+            BaseSym = x[2];
+            if (BaseSym == x[4] && BaseSym == x[6])
+                return true;
+            return false;
+        }
+        static void CashOut(int x)
+        {
+            PlayerWallet += x;
+            Console.WriteLine("You have earned ${0}, and you now have ${1} in your wallet", x, PlayerWallet);
+            Winnings = 0;
+        }
+        static void Outro()
+        {
+            string LetsGo = @"You now realize you've spent an entire afternoon playing the slots, you've missed your bus once again. Did you win? Did you lose?
+It doesn't really matter because everyone knows that at the end of the day the house always wins.
+You also realize you should have never come in here because you are life-destroyingly addicted to gambling.... Oh well, have a good day!";
+            Console.Clear();
+            Console.WriteLine(LetsGo);
+            if (PlayerWallet == 0)
+                Console.Write("Also, I don't know how you plan to get home now that you spent all of your money on your toxic gambling addiction...");
+            else
+                Console.Write("Hey at least you have ${0} left in your wallet though right?", PlayerWallet);
+        }
+
+    }
+}
